@@ -3,31 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/16 20:05:54 by achillebosc       #+#    #+#             */
-/*   Updated: 2024/11/16 23:06:16 by achillebosc      ###   ########.fr       */
+/*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
+/*   Updated: 2024/12/06 03:39:40 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minilibx-linux/mlx.h"
 #include "so_long.h"
 
-int check_args(int argc, char **argv)
+int	main(void)
 {
-    if (argc != 2)
-        return (ft_printf("Vous devez fournir 1 carte"));
-    if (argc == 2)
-    {
-        if (!end_with(argv[1], ".ber"))
-            ft_printf("La carte que vous avez fourni n'a pas le bon format");
-        //vérif map lisible && existante && possible à finir && 
-    }
-    return (0);
-}
+	void	*mlx;
+	void	*mlx_win;
 
-int main(int argc, char **argv)
-{
-    if (!check_args(argc, argv))
-        return (ft_printf("Erreur\nCeci n'est pas le format attendu d'une carte. Voici le format attendu:\n<nonm_de_fichier>.ber\n*.ber"));
-    return (0);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Hello world!");
+	mlx_loop(mlx);
+	ft_printf("%p", mlx_win);
+	return (0);
 }
