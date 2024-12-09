@@ -37,11 +37,9 @@ clean:
 fclean: clean
 	@$(MAKE) -C $(LIBFT) -s fclean ||\
 		(echo "$(TERM_UP)$(RED)Error in libft cleaning!$(DEF_COLOR)" && exit 1)
-	@$(MAKE) -C $(LIBX) -s fclean ||\
-		(echo "$(TERM_UP)$(RED)Error in libx cleaning!$(DEF_COLOR)" && exit 1)
 	@rm -f $(NAME)
 	@echo "$(TERM_UP)$(GREEN)Full clean Successful!$(DEF_COLOR)"
-
+	
 re: fclean all
 
 .PHONY: all clean fclean re
