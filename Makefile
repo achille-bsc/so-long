@@ -3,10 +3,10 @@ CFLAGS = -Wall -Wextra -Werror
 MLXFLAGS = -lmlx -lXext -lX11
 NAME = so_long
 
-LIBFT = libft
-LIBX = minilibx-linux
+LIBFT = libs/libft
+LIBX = libs/minilibx-linux
 
-SRCS = main.c
+SRCS = src/main.c src/map.c
 
 GREEN = \033[32m
 RED = \033[31m
