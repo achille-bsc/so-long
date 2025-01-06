@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2024/12/11 17:31:57 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/06 10:41:34 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@ int handle_keypress(int keycode, void *param)
 
 int	main(void)
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		width;
-	int		height;
+	void		*mlx;
+	void		*win;
+	// int			width;
+	// int			height;
+	t_window	*window;
 
+	window = malloc(sizeof(t_window));
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, 1080, 720, "So Long");
 	if (!win)
 		return (1);
-	
-	img = mlx_xpm_file_to_image(mlx, "./textures/rene.xpm", &width, &height);
-	if (!img)
-		return (1);
 
-	mlx_put_image_to_window(mlx, win, img, 0, 0);
+	window->mlx = mlx;
+	window->win = win;
+	ft_printf("000\n");
+	draw_map(window, "../maps/map_simple.bers");
+	ft_printf("999\n");
     mlx_hook(win, 17, 0, close_window, NULL);
 
-	// Lier la fonction handle_keypress à un événement de touche pressée
     mlx_key_hook(win, handle_keypress, NULL);
 
 	mlx_loop(mlx);

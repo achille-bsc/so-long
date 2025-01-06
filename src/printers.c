@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   printers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/06 10:00:37 by abosc            ###   ########.fr       */
+/*   Created: 2025/01/06 09:17:43 by abosc             #+#    #+#             */
+/*   Updated: 2025/01/06 10:26:41 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG
-# define SO_LONG
+#include "../headers/so_long.h"
 
-# include "../libs/minilibx-linux/mlx.h"
-# include "../libs/libft/libft.h"
-# include "structures.h"
-
-void	draw_map(t_window *window, char *map);
-void	printer(t_window win, t_pos pos, char	*pict);
-
-#endif
+void	printer(t_window win, t_pos pos, char	*pict)
+{
+	mlx_xpm_file_to_image(win.mlx, pict, &pos.x, &pos.y);
+	pos.x += 16;
+	pos.y += 16;
+}
