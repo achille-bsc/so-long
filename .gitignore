@@ -1,6 +1,7 @@
 libft
 .vscode
 *.pdf
-*.o
+*/*.o
 *.a
 so_long
+textures/
