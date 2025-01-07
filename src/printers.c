@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:17:43 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/06 15:29:10 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:14:58 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,4 @@ void	printer(t_window win, t_pos *pos, char *pict)
 
 	img = mlx_xpm_file_to_image(win.mlx, pict, &width, &height);
 	mlx_put_image_to_window(win.mlx, win.win, img, pos->x, pos->y);
-	pos->x += 216;
-	// pos->y += 16;
 }

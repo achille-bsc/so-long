@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/06 15:07:10 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/07 16:35:08 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 	void		*win;
 	t_window	*window;
 	char		*map;
+	t_player	*player;
 
 	map = "./maps/map_simple.ber";
 	if (argc != 1)
@@ -44,7 +45,8 @@ int	main(int argc, char **argv)
 		return (1);
 	window->mlx = mlx;
 	window->win = win;
-	draw_map(window, map);
+	player = calcul_player();
+	draw_map(window, map, player);
 	mlx_hook(win, 17, 0, close_window, NULL);
 	mlx_key_hook(win, handle_keypress, NULL);
 	mlx_loop(mlx);
