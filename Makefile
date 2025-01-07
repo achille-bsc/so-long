@@ -6,7 +6,7 @@ NAME = so_long
 LIBFT = libs/libft
 LIBX = libs/minilibx-linux
 
-SRCS = src/main.c src/map.c src/printers.c
+SRCS = src/main.c src/map.c src/printers.c src/calcul_player.c
 
 GREEN = \033[32m
 RED = \033[31m
