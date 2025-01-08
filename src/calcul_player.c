@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 16:00:49 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 18:41:47 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,29 @@
 t_player	*init_player(char *map)
 {
 	int			i;
-	int			x;
-	int			y;
+	t_pos		*coord;
 	t_player	*player;
 
-	i = 0;
-	x = 0;
-	y = 0;
+	i = -1;
+	coord = ft_calloc(1, sizeof(t_pos));
+	coord->x = 0;
+	coord->y = 0;
 	player = ft_calloc(1, sizeof(t_player));
-	while (map[i])
+	while (map[++i])
 	{
 		if (map[i] == 'P')
 		{
-			player->pos_x = x;
-			player->pos_y = y;
+			player->pos_x = coord->x;
+			player->pos_y = coord->y;
 			player->orientation = "top";
-			player->moved = 0;
 			return (player);
 		}
-		x++;
+		coord->x++;
 		if (map[i] == '\n')
 		{
-			y++;
-			x = 0;
+			coord->x = 0;
+			coord->y++;
 		}
-		i++;
 	}
 	return (player);
 }

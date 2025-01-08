@@ -19,8 +19,8 @@
 # include "structures.h"
 
 # define EVENT_CLOSE 17
-#define MASK_NO_EVENT 0
-
+# define MASK_NO_EVENT 0
+# define FPS 60
 void		draw_map(t_window *window, char *map, t_player *player);
 void		printer(t_window win, t_pos *pos, char *pict);
 void		mapper(char *map_chars, t_window *window, t_pos *pos,

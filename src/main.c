@@ -6,11 +6,11 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 16:21:13 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 18:46:20 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/so_long.h" 
+#include "../headers/so_long.h"
 
 int	close_window(t_parameters *param)
 {
@@ -24,8 +24,8 @@ int	close_window(t_parameters *param)
 
 int	handle_keypress(int keycode, t_parameters *params)
 {
-	printf("Touche pressée : %d\n", keycode);
-	if (keycode == 65307 || keycode == 113)
+	// printf("Touche pressée : %d\n", keycode);
+	if (keycode == 65307)
 		exit(0);
 	if (keycode == 65362)
 	{
@@ -47,7 +47,6 @@ int	handle_keypress(int keycode, t_parameters *params)
 		move_right(params->player);
 		params->player->moved = 1;
 	}
-	
 	return (0);
 }
 
