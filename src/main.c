@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/07 20:29:12 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 14:21:36 by achillebosc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
-
-int	close_window(void *param)
-{
-	(void)param;
-	exit(0);
-}
 
 int	handle_keypress(int keycode, t_player *player)
 {
@@ -43,7 +37,6 @@ int	handle_keypress(int keycode, t_player *player)
 		move_right(player);
 		player->moved = 1;
 	}
-	
 	return (0);
 }
 
@@ -61,35 +54,45 @@ int	update(t_parameters *parameters)
 	return (0);
 }
 
+static t_parameters	*init_game(int argc, char **argv, t_window **window)
+{
+	t_parameters	*parameters;
+	char			*map;
+
+	map = "./maps/map_simple.ber";
+	if (argc != 1)
+		map = argv[1];
+	*window = malloc(sizeof(t_window));
+	if (!*window)
+		return (NULL);
+	(*window)->mlx = mlx_init();
+	(*window)->win = mlx_new_window((*window)->mlx, 1080, 720, "So Long");
+	if (!(*window)->win)
+		return (NULL);
+	map = load_map(map);
+	parameters = malloc(sizeof(t_parameters));
+	if (!parameters)
+		return (NULL);
+	parameters->window = *window;
+	parameters->map = map;
+	parameters->player = init_player(map);
+	return (parameters);
+}
+
 int	main(int argc, char **argv)
 {
 	void			*mlx;
 	void			*win;
 	t_window		*window;
-	char			*map;
-	t_player		*player;
 	t_parameters	*parameters;
 
-	map = "./maps/map_simple.ber";
-	if (argc != 1)
-		map = argv[1];
-	window = malloc(sizeof(t_window));
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 1080, 720, "So Long");
-	if (!win)
+	parameters = init_game(argc, argv, &window);
+	if (!parameters)
 		return (1);
-	window->mlx = mlx;
-	window->win = win;
-	map = load_map(map);
-	player = init_player(map);
-	parameters = malloc(sizeof(t_parameters));
-	parameters->window = window;
-	parameters->map = map;
-	parameters->player = player;
-	draw_map(window, map, player);
-	mlx_hook(win, 17, 0, close_window, NULL);
-	mlx_key_hook(win, handle_keypress, player);
-	mlx_loop_hook(mlx, update, parameters);
-	mlx_loop(mlx);
+	draw_map(window, parameters->map, parameters->player);
+	mlx_hook(window->win, EVENT_CLOSE, MASK_NO_EVENT, exit, NULL);
+	mlx_key_hook(window->win, handle_keypress, parameters->player);
+	mlx_loop_hook(window->mlx, update, parameters);
+	mlx_loop(window->mlx);
 	return (0);
 }
