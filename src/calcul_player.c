@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/07 20:18:24 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:00:49 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_player	*init_player(char *map)
 	i = 0;
 	x = 0;
 	y = 0;
-	player = malloc(sizeof(t_player));
+	player = ft_calloc(1, sizeof(t_player));
 	while (map[i])
 	{
 		if (map[i] == 'P')
@@ -46,24 +46,32 @@ t_player	*init_player(char *map)
 
 void	move_up(t_player *player)
 {
+	player->last_pos_x = player->pos_x;
+	player->last_pos_y = player->pos_y;
 	player->pos_y -= 1;
 	player->orientation = "top";
 }
 
 void	move_down(t_player *player)
 {
+	player->last_pos_x = player->pos_x;
+	player->last_pos_y = player->pos_y;
 	player->pos_y += 1;
 	player->orientation = "bottom";
 }
 
 void	move_left(t_player *player)
 {
+	player->last_pos_x = player->pos_x;
+	player->last_pos_y = player->pos_y;
 	player->pos_x -= 1;
 	player->orientation = "left";
 }
 
 void	move_right(t_player *player)
 {
+	player->last_pos_x = player->pos_x;
+	player->last_pos_y = player->pos_y;
 	player->pos_x += 1;
 	player->orientation = "right";
 }

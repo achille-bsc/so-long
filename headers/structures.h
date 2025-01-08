@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:34:33 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 14:22:59 by achillebosc      ###   ########.fr       */
+/*   Updated: 2025/01/08 16:22:28 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_player
 {
 	int			pos_x;
 	int			pos_y;
+	int			last_pos_x;
+	int			last_pos_y;
 	char		*orientation;
 	int			moved;
 }				t_player;

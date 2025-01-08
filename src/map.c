@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:37:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/07 20:38:31 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 16:07:56 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,21 @@ void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
 	y = 0;
 	while (map_chars[i])
 	{
-		if (player->pos_x == x && player->pos_y == y)
+		if (player->pos_x == x && player->pos_y == y && map_chars[i] == '1')
+		{
+			t_pos	*pos2;
+			
+			pos2 = ft_calloc(1, sizeof(t_pos));
+			if (!pos2)
+				return ;
+			pos2->x = player->last_pos_x;
+			pos2->y = player->last_pos_y;
+			player->pos_x = player->last_pos_x;
+			player->pos_y = player->last_pos_y;
+			draw_texture(window, pos2, 'p', player->orientation);
+			
+		}
+		else if (player->pos_x == x && player->pos_y == y)
 			draw_texture(window, pos, 'p', player->orientation);
 		else
 			draw_texture(window, pos, map_chars[i], player->orientation);
@@ -70,10 +84,11 @@ void	draw_map(t_window *window, char *map_chars, t_player *player)
 {
 	t_pos	*pos;
 
-	pos = malloc(sizeof(t_pos));
+	pos = ft_calloc(1, sizeof(t_pos));
 	if (!pos)
 		return ;
 	pos->x = 1;
 	pos->y = 1;
 	mapper(map_chars, window, pos, player);
+	free(pos);
 }
