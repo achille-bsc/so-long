@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 21:20:22 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/09 18:12:04 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	main(int argc, char **argv)
 		map = argv[1];
 	window = ft_calloc(1, sizeof(t_window));
 	mlx = mlx_init();
+	if (!mlx)
+		return (0);
 	win = mlx_new_window(mlx, 1080, 720, "So Long");
 	if (!win)
 		return (1);
