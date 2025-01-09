@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 21:32:25 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/09 19:06:16 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_player	*init_player(char *map)
 
 void	move_up(t_player *player, t_parameters *params)
 {
-	if (check_movement(params, (t_pos){player->pos_x, player->pos_y - 1}))
+	if (check_movement(params, (t_pos){player->pos_x, player->pos_y - 1}) == 1)
 	{
 		player->last_pos_x = player->pos_x;
 		player->last_pos_y = player->pos_y;
@@ -55,7 +55,7 @@ void	move_up(t_player *player, t_parameters *params)
 
 void	move_down(t_player *player, t_parameters *params)
 {
-	if (check_movement(params, (t_pos){player->pos_x, player->pos_y + 1}))
+	if (check_movement(params, (t_pos){player->pos_x, player->pos_y + 1}) )
 	{
 		player->last_pos_x = player->pos_x;
 		player->last_pos_y = player->pos_y;
