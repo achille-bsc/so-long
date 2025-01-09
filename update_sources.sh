@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SRC_DIR="./src"
-SRC_MK="Makefile"
+SRC_MK="Sources.mk"
 # Change à true si tu es sous macOS
 macOS=false 
 
