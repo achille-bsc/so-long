@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 18:41:47 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 21:32:25 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_player	*init_player(char *map)
 
 	i = -1;
 	coord = ft_calloc(1, sizeof(t_pos));
-	coord->x = 0;
+	coord->x = -1;
 	coord->y = 0;
 	player = ft_calloc(1, sizeof(t_player));
 	while (map[++i])
@@ -42,34 +42,46 @@ t_player	*init_player(char *map)
 	return (player);
 }
 
-void	move_up(t_player *player)
+void	move_up(t_player *player, t_parameters *params)
 {
-	player->last_pos_x = player->pos_x;
-	player->last_pos_y = player->pos_y;
-	player->pos_y -= 1;
-	player->orientation = "top";
+	if (check_movement(params, (t_pos){player->pos_x, player->pos_y - 1}))
+	{
+		player->last_pos_x = player->pos_x;
+		player->last_pos_y = player->pos_y;
+		player->pos_y -= 1;
+		player->orientation = "top";
+	}
 }
 
-void	move_down(t_player *player)
+void	move_down(t_player *player, t_parameters *params)
 {
-	player->last_pos_x = player->pos_x;
-	player->last_pos_y = player->pos_y;
-	player->pos_y += 1;
-	player->orientation = "bottom";
+	if (check_movement(params, (t_pos){player->pos_x, player->pos_y + 1}))
+	{
+		player->last_pos_x = player->pos_x;
+		player->last_pos_y = player->pos_y;
+		player->pos_y += 1;
+		player->orientation = "bottom";
+	}
 }
 
-void	move_left(t_player *player)
+void	move_left(t_player *player, t_parameters *params)
 {
-	player->last_pos_x = player->pos_x;
-	player->last_pos_y = player->pos_y;
-	player->pos_x -= 1;
-	player->orientation = "left";
+	if (check_movement(params, (t_pos){player->pos_x - 1, player->pos_y}))
+	{
+		player->last_pos_x = player->pos_x;
+		player->last_pos_y = player->pos_y;
+		player->pos_x -= 1;
+		player->orientation = "left";
+	}
 }
 
-void	move_right(t_player *player)
+void	move_right(t_player *player, t_parameters *params)
 {
-	player->last_pos_x = player->pos_x;
-	player->last_pos_y = player->pos_y;
-	player->pos_x += 1;
-	player->orientation = "right";
+	if (check_movement(params, (t_pos){player->pos_x + 1, player->pos_y}))
+	{
+		player->last_pos_x = player->pos_x;
+		player->last_pos_y = player->pos_y;
+		player->pos_x += 1;
+		player->orientation = "right";
+	}
 }

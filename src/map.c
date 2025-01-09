@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:37:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 18:15:31 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 21:04:10 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
 	int	i;
 	int	x;
 	int	y;
+			t_pos *pos2;
 
 	i = 0;
 	x = 0;
@@ -51,8 +52,6 @@ void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
 	{
 		if (player->pos_x == x && player->pos_y == y && map_chars[i] == '1')
 		{
-			t_pos	*pos2;
-			
 			pos2 = ft_calloc(1, sizeof(t_pos));
 			if (!pos2)
 				return ;
@@ -60,7 +59,7 @@ void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
 			pos2->y = player->last_pos_y * 32;
 			player->pos_x = player->last_pos_x;
 			player->pos_y = player->last_pos_y;
-			draw_texture(window, pos2, 'p', player->orientation);			
+			draw_texture(window, pos2, 'p', player->orientation);
 		}
 		else if (player->pos_x == x && player->pos_y == y)
 			draw_texture(window, pos, 'p', player->orientation);

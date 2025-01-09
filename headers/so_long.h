@@ -26,9 +26,10 @@ void		printer(t_window win, t_pos *pos, char *pict);
 void		mapper(char *map_chars, t_window *window, t_pos *pos,
 				t_player *player);
 t_player	*init_player(char *map);
-void		move_up(t_player *player);
-void		move_down(t_player *player);
-void		move_left(t_player *player);
-void		move_right(t_player *player);
+void		move_up(t_player *player, t_parameters *params);
+void		move_down(t_player *player, t_parameters *params);
+void		move_left(t_player *player, t_parameters *params);
+void		move_right(t_player *player, t_parameters *params);
+int	check_movement(t_parameters *params, t_pos coord);
 
 #endif

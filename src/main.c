@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 18:46:20 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/08 21:20:22 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ int	handle_keypress(int keycode, t_parameters *params)
 		exit(0);
 	if (keycode == 65362)
 	{
-		move_up(params->player);
+		move_up(params->player, params);
 		params->player->moved = 1;
 	}
 	if (keycode == 65364)
 	{
-		move_down(params->player);
+		move_down(params->player, params);
 		params->player->moved = 1;
 	}
 	if (keycode == 65361)
 	{
-		move_left(params->player);
+		move_left(params->player, params);
 		params->player->moved = 1;
 	}
 	if (keycode == 65363)
 	{
-		move_right(params->player);
+		move_right(params->player, params);
 		params->player->moved = 1;
 	}
 	return (0);
