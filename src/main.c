@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/10 05:28:15 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/10 23:53:00 by achillebosc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 	parameters->map = map;
 	parameters->player = init_player(parameters);
 	parameters->img_count = 0;
+	flood_fill();
 	draw_map(parameters->map, parameters->player, parameters);
 	mlx_hook(parameters->window->win, 17, 0, close_window, NULL);
 	mlx_hook(parameters->window->win, 2, KeyPressMask, handle_keypress,
