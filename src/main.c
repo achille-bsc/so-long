@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/09 18:12:04 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/10 05:28:15 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	close_window(t_parameters *param)
 
 int	handle_keypress(int keycode, t_parameters *params)
 {
-	// printf("Touche pressée : %d\n", keycode);
 	if (keycode == 65307)
 		exit(0);
 	if (keycode == 65362)
@@ -60,10 +59,13 @@ char	*load_map(char *map)
 
 int	update(t_parameters *parameters)
 {
+	usleep(1000000 / FPS);
 	if (parameters->player->moved)
 	{
-		draw_map(parameters->window, parameters->map, parameters->player);
+		draw_map(parameters->map, parameters->player, parameters);
 		parameters->player->moved = 0;
+		parameters->player->steps++;
+		ft_printf("Steps: %d\n", parameters->player->steps);
 	}
 	return (0);
 }
@@ -71,33 +73,25 @@ int	update(t_parameters *parameters)
 int	main(int argc, char **argv)
 {
 	void			*mlx;
-	void			*win;
-	t_window		*window;
 	char			*map;
-	t_player		*player;
 	t_parameters	*parameters;
 
-	map = "./maps/map_simple.ber";
-	if (argc != 1)
-		map = argv[1];
-	window = ft_calloc(1, sizeof(t_window));
-	mlx = mlx_init();
-	if (!mlx)
-		return (0);
-	win = mlx_new_window(mlx, 1080, 720, "So Long");
-	if (!win)
-		return (1);
-	window->mlx = mlx;
-	window->win = win;
+	parameters = init_parameters();
+	mlx = create_mlx();
+	map = get_map(argc, argv);
+	parameters->window = ft_calloc(1, sizeof(t_window));
+	parameters->window->win = create_window(mlx);
+	parameters->window->mlx = mlx;
+	parameters->window->win = parameters->window->win;
 	map = load_map(map);
-	player = init_player(map);
-	parameters = ft_calloc(1, sizeof(t_parameters));
-	parameters->window = window;
+	parameters->collectibles_count = load_collectibles(map);
 	parameters->map = map;
-	parameters->player = player;
-	draw_map(window, map, player);
-	mlx_hook(win, 17, 0, close_window, NULL);
-	mlx_hook(win, 2, KeyPressMask, handle_keypress, parameters);
+	parameters->player = init_player(parameters);
+	parameters->img_count = 0;
+	draw_map(parameters->map, parameters->player, parameters);
+	mlx_hook(parameters->window->win, 17, 0, close_window, NULL);
+	mlx_hook(parameters->window->win, 2, KeyPressMask, handle_keypress,
+		parameters);
 	mlx_loop_hook(mlx, update, parameters);
 	mlx_loop(mlx);
 	return (0);

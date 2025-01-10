@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:34:33 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 16:22:28 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/10 04:12:13 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@ typedef struct s_player
 	int			last_pos_y;
 	char		*orientation;
 	int			moved;
+	int			collected;
+	int			steps;
+	int 		can_exit;
 }				t_player;
 
 typedef struct s_checker_infos
@@ -52,4 +55,12 @@ typedef struct s_parameters
 	t_window	*window;
 	char		*map;
 	t_player	*player;
+	int			collectibles_count;
+	int			img_count;
 }				t_parameters;
+
+typedef struct s_vect_2
+{
+	int			x;
+	int			y;
+}				t_vect_2;

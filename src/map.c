@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:37:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 21:04:10 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/10 05:53:02 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	draw_texture(t_window *window, t_pos *pos, char map_char,
 	}
 }
 
-void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
+void	mapper(char *map_chars, t_pos *pos, t_player *player,
+		t_parameters *params)
 {
-	int	i;
-	int	x;
-	int	y;
-			t_pos *pos2;
+	int		i;
+	int		x;
+	int		y;
 
 	i = 0;
 	x = 0;
@@ -51,34 +51,22 @@ void	mapper(char *map_chars, t_window *window, t_pos *pos, t_player *player)
 	while (map_chars[i])
 	{
 		if (player->pos_x == x && player->pos_y == y && map_chars[i] == '1')
-		{
-			pos2 = ft_calloc(1, sizeof(t_pos));
-			if (!pos2)
-				return ;
-			pos2->x = player->last_pos_x * 32;
-			pos2->y = player->last_pos_y * 32;
-			player->pos_x = player->last_pos_x;
-			player->pos_y = player->last_pos_y;
-			draw_texture(window, pos2, 'p', player->orientation);
-		}
+			exec_player(params);
 		else if (player->pos_x == x && player->pos_y == y)
-			draw_texture(window, pos, 'p', player->orientation);
+			draw_texture(params->window, pos, 'p', player->orientation);
 		else
-			draw_texture(window, pos, map_chars[i], player->orientation);
+			draw_texture(params->window, pos, map_chars[i],
+				player->orientation);
+		player_checker(params, x, y, i);
 		pos->x += 32;
 		x += 1;
 		if (map_chars[i] == '\n')
-		{
-			pos->y += 32;
-			pos->x = 0;
-			y += 1;
-			x = 0;
-		}
+			increment_coords(&x, &y, pos);
 		i++;
 	}
 }
 
-void	draw_map(t_window *window, char *map_chars, t_player *player)
+void	draw_map(char *map_chars, t_player *player, t_parameters *params)
 {
 	t_pos	*pos;
 
@@ -87,6 +75,6 @@ void	draw_map(t_window *window, char *map_chars, t_player *player)
 		return ;
 	pos->x = 1;
 	pos->y = 1;
-	mapper(map_chars, window, pos, player);
+	mapper(map_chars, pos, player, params);
 	free(pos);
 }

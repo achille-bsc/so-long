@@ -6,13 +6,13 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/09 19:06:16 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/10 05:19:38 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 
-t_player	*init_player(char *map)
+t_player	*init_player(t_parameters *params)
 {
 	int			i;
 	t_pos		*coord;
@@ -20,20 +20,19 @@ t_player	*init_player(char *map)
 
 	i = -1;
 	coord = ft_calloc(1, sizeof(t_pos));
-	coord->x = -1;
+	coord->x = 0;
 	coord->y = 0;
 	player = ft_calloc(1, sizeof(t_player));
-	while (map[++i])
+	while (params->map[++i])
 	{
-		if (map[i] == 'P')
+		ft_printf("%c\n", params->map[i]);
+		if (params->map[i] == 'P')
 		{
-			player->pos_x = coord->x;
-			player->pos_y = coord->y;
-			player->orientation = "top";
+			set_player_coord(player, coord);
 			return (player);
 		}
 		coord->x++;
-		if (map[i] == '\n')
+		if (params->map[i] == '\n')
 		{
 			coord->x = 0;
 			coord->y++;
@@ -55,7 +54,7 @@ void	move_up(t_player *player, t_parameters *params)
 
 void	move_down(t_player *player, t_parameters *params)
 {
-	if (check_movement(params, (t_pos){player->pos_x, player->pos_y + 1}) )
+	if (check_movement(params, (t_pos){player->pos_x, player->pos_y + 1}))
 	{
 		player->last_pos_x = player->pos_x;
 		player->last_pos_y = player->pos_y;
