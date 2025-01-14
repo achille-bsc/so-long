@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 03:17:03 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/10 05:22:08 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:11:40 by achillebosc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,11 @@ t_parameters	*init_parameters(void)
 	if (!parameters)
 		exit(0);
 	return (parameters);
+}
+char	*load_map(char *map)
+{
+	int	fd;
+
+	fd = open(map, O_RDONLY);
+	return (read_file(fd));
 }

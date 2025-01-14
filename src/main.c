@@ -6,7 +6,7 @@
 /*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/10 23:53:00 by achillebosc      ###   ########.fr       */
+/*   Updated: 2025/01/12 15:15:45 by achillebosc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,6 @@ int	handle_keypress(int keycode, t_parameters *params)
 	return (0);
 }
 
-char	*load_map(char *map)
-{
-	int	fd;
-
-	fd = open(map, O_RDONLY);
-	return (read_file(fd));
-}
-
 int	update(t_parameters *parameters)
 {
 	usleep(1000000 / FPS);
@@ -82,16 +74,17 @@ int	main(int argc, char **argv)
 	parameters->window = ft_calloc(1, sizeof(t_window));
 	parameters->window->win = create_window(mlx);
 	parameters->window->mlx = mlx;
-	parameters->window->win = parameters->window->win;
 	map = load_map(map);
 	parameters->collectibles_count = load_collectibles(map);
 	parameters->map = map;
 	parameters->player = init_player(parameters);
 	parameters->img_count = 0;
-	flood_fill();
+	if (!validate_map(parameters->map, get_map_width(parameters->map),
+			get_map_height(parameters->map)))
+		return (0);
 	draw_map(parameters->map, parameters->player, parameters);
-	mlx_hook(parameters->window->win, 17, 0, close_window, NULL);
-	mlx_hook(parameters->window->win, 2, KeyPressMask, handle_keypress,
+	mlx_hook(parameters->window->win, EVENT_CLOSE, 0, close_window, NULL);
+	mlx_hook(parameters->window->win, KeyPress, KeyPressMask, handle_keypress,
 		parameters);
 	mlx_loop_hook(mlx, update, parameters);
 	mlx_loop(mlx);

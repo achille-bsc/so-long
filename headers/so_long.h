@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/10 05:53:55 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/12 15:14:06 by achillebosc      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char			*get_map(int argc, char **argv);
 void			*create_window(void *mlx);
 void			*create_mlx(void);
 t_parameters	*init_parameters(void);
+char			*load_map(char *map);
 
 // map_utils
 void			update_coord(t_pos *pos2, t_player *player);
@@ -50,4 +51,6 @@ void			exec_player(t_parameters *params);
 // Player utils
 void			set_player_coord(t_player *player, t_pos *coord);
 
+
+int validate_map(char **map, int width, int height);
 #endif
