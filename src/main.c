@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/12 15:15:45 by achillebosc      ###   ########.fr       */
+/*   Updated: 2025/01/16 23:12:27 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,26 @@
 
 int	close_window(t_parameters *param)
 {
-	free(param->map);
-	free(param->player);
-	mlx_destroy_window(param->window->mlx, param->window->win);
-	mlx_destroy_display(param->window->mlx);
-	free(param);
-	exit(0);
+	if (param->map)
+        free(param->map);
+    if (param->player)
+        free(param->player);
+    if (param->window)
+    {
+        if (param->window->mlx && param->window->win)
+            mlx_destroy_window(param->window->mlx, param->window->win);
+        if (param->window->mlx)
+            mlx_destroy_display(param->window->mlx);
+        free(param->window);
+    }
+    free(param);
+    exit(0);
 }
 
 int	handle_keypress(int keycode, t_parameters *params)
 {
 	if (keycode == 65307)
-		exit(0);
+		close_window(params);
 	if (keycode == 65362)
 	{
 		move_up(params->player, params);
@@ -72,16 +80,20 @@ int	main(int argc, char **argv)
 	mlx = create_mlx();
 	map = get_map(argc, argv);
 	parameters->window = ft_calloc(1, sizeof(t_window));
-	parameters->window->win = create_window(mlx);
 	parameters->window->mlx = mlx;
 	map = load_map(map);
 	parameters->collectibles_count = load_collectibles(map);
 	parameters->map = map;
 	parameters->player = init_player(parameters);
 	parameters->img_count = 0;
+
 	if (!validate_map(parameters->map, get_map_width(parameters->map),
 			get_map_height(parameters->map)))
-		return (0);
+	{
+		ft_printf("Invalid map\n");
+		exit(1);
+	}
+	parameters->window->win = create_window(mlx);
 	draw_map(parameters->map, parameters->player, parameters);
 	mlx_hook(parameters->window->win, EVENT_CLOSE, 0, close_window, NULL);
 	mlx_hook(parameters->window->win, KeyPress, KeyPressMask, handle_keypress,

@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:34:33 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/10 04:12:13 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/16 23:13:47 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,3 @@ typedef struct s_parameters
 	int			collectibles_count;
 	int			img_count;
 }				t_parameters;
-
-typedef struct s_vect_2
-{
-	int			x;
-	int			y;
-}				t_vect_2;

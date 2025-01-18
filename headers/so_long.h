@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/12 15:14:06 by achillebosc      ###   ########.fr       */
+/*   Updated: 2025/01/16 21:20:46 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int				check_movement(t_parameters *params, t_pos coord);
 int				load_collectibles(char *map);
 void			draw_texture(t_window *window, t_pos *pos, char map_char,
 					char *orientation);
+int	close_window(t_parameters *param);
 
 // Utils
 char			*get_map(int argc, char **argv);
@@ -42,7 +43,10 @@ void			*create_window(void *mlx);
 void			*create_mlx(void);
 t_parameters	*init_parameters(void);
 char			*load_map(char *map);
-
+// Utils 2
+int				get_map_width(char *map);
+int				get_map_height(char *map);
+void			free_str_tab(char **tab);
 // map_utils
 void			update_coord(t_pos *pos2, t_player *player);
 void			player_checker(t_parameters *params, int x, int y, int i);
@@ -51,6 +55,8 @@ void			exec_player(t_parameters *params);
 // Player utils
 void			set_player_coord(t_player *player, t_pos *coord);
 
+// Flood fill
+int				validate_map(char *map, int width, int height);
+int				check_border(char **map, int width, int height);
 
-int validate_map(char **map, int width, int height);
 #endif

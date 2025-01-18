@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 11:01:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/08 15:50:44 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/16 21:12:21 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@ char	*read_file(int fd)
 {
 	char	*line;
 	char	*result;
+	char	*tmp;
 
-	line = get_next_line(fd);
-	result = "\0";
-	while (line)
+	result = ft_calloc(1, sizeof(char));
+	while (1)
 	{
-		result = ft_strjoin(result, line);
-		free(line);
 		line = get_next_line(fd);
+		if (!line)
+			break ;
+		tmp = result;
+		result = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
 	}
 	free(line);
 	return (result);

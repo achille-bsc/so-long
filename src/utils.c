@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achillebosc <achillebosc@student.42.fr>    +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 03:17:03 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/12 15:11:40 by achillebosc      ###   ########.fr       */
+/*   Updated: 2025/01/16 20:38:56 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_parameters	*init_parameters(void)
 
 	parameters = ft_calloc(1, sizeof(t_parameters));
 	if (!parameters)
-		exit(0);
+		exit(1);
 	return (parameters);
 }
 char	*load_map(char *map)

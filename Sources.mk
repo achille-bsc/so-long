@@ -11,4 +11,4 @@
 # **************************************************************************** #
 
 
-SRCS := src/movement.c src/calcul_player.c src/main.c src/map.c src/printers.c src/collectibles.c src/utils.c src/map_utils.c src/player_utils.c 
+SRCS := src/flood_fill.c src/main.c src/utils.c src/movement.c src/calcul_player.c src/map.c src/printers.c src/collectibles.c src/map_utils.c src/player_utils.c src/utils_2.c 
