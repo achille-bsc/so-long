@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 00:45:41 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 21:30:28 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,25 @@
 int	close_window(t_parameters *param)
 {
 	if (param)
-    {
-        if (param->map)
-            free(param->map);
-        if (param->player)
-            free(param->player);
-        if (param->window)
-        {
-            if (param->window->mlx && param->window->win)
-                mlx_destroy_window(param->window->mlx, param->window->win);
-            if (param->window->mlx)
-            {
-                mlx_destroy_display(param->window->mlx);
-                free(param->window->mlx);
-            }
-            free(param->window);
-        }
-        free(param);
-    }
-    exit(0);
+	{
+		if (param->map)
+			free(param->map);
+		if (param->player)
+			free(param->player);
+		if (param->window)
+		{
+			if (param->window->mlx && param->window->win)
+				mlx_destroy_window(param->window->mlx, param->window->win);
+			if (param->window->mlx)
+			{
+				mlx_destroy_display(param->window->mlx);
+				free(param->window->mlx);
+			}
+			free(param->window);
+		}
+		free(param);
+	}
+	exit(0);
 }
 
 int	handle_keypress(int keycode, t_parameters *params)
@@ -92,12 +92,11 @@ int	main(int argc, char **argv)
 	parameters->collectibles_count = load_collectibles(parameters->map);
 	parameters->player = init_player(parameters);
 	parameters->img_count = 0;
-
 	if (!validate_map(parameters->map, get_map_width(parameters->map),
 			get_map_height(parameters->map)))
 	{
 		ft_printf("Invalid map\n");
-		exit(1);
+		close_window(parameters);
 	}
 	parameters->window->win = create_window(mlx, parameters);
 	draw_map(parameters->map, parameters->player, parameters);

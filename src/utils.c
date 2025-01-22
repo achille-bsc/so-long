@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 03:17:03 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/18 04:01:13 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 21:31:11 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_parameters	*init_parameters(void)
 		exit(1);
 	return (parameters);
 }
+
 char	*load_map(char *map)
 {
 	int	fd;

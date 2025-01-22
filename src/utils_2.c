@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:15:26 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/16 21:20:26 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 21:31:21 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	get_map_height(char *map)
 	}
 	return (height);
 }
-
 
 void	free_str_tab(char **tab)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 00:11:00 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 22:13:17 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,18 @@ void			set_player_coord(t_player *player, t_pos *coord);
 // Flood fill
 int				validate_map(char *map, int width, int height);
 int				check_border(char **map, int width, int height);
+int				flood_fill(char **map, t_pos *coord, int *exit,
+					int *collectibles);
+
+// ff utils
+int				process_map_line(char **new_map, t_pos *player_coord, int *exit,
+					int *collectibles);
+t_pos			*allocate_position(int x, int y);
+int				check_position(char **map, t_pos *coord, int *exit,
+					int *collectibles);
+int				process_neighbors(char **map, t_pos *coord, int *exit,
+					int *collectibles);
+int				validate_map_conditions(t_map_validation *validation,
+					char **new_map);
 
 #endif

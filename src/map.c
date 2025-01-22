@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 18:37:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 00:28:05 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 21:31:29 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,3 @@ void	draw_map(char *map_chars, t_player *player, t_parameters *params)
 	pos.y = 1;
 	mapper(map_chars, &pos, player, params);
 }
- 

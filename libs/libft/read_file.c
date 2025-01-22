@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 11:01:08 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/21 20:39:42 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 21:32:25 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*read_file(int fd)
 		result = ft_strjoin(tmp, line);
 		free(tmp);
 		free(line);
-		if (!result) // Vérification après ft_strjoin
+		if (!result)
 			return (NULL);
 	}
 	return (result);
