@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 03:17:03 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/16 20:38:56 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/18 04:01:13 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,15 @@ char	*get_map(int argc, char **argv)
 	return (map);
 }
 
-void	*create_window(void *mlx)
+void	*create_window(void *mlx, t_parameters *params)
 {
 	void	*win;
+	int		width;
+	int		height;
 
-	win = mlx_new_window(mlx, 1080, 720, "So Long");
+	width = get_map_width(params->map) * 32;
+	height = get_map_height(params->map) * 32;
+	win = mlx_new_window(mlx, width, height, "So Long");
 	if (!win)
 		exit(1);
 	return (win);

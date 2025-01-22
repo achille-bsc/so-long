@@ -5,98 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 23:57:23 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/06 12:05:26 by abosc            ###   ########.fr       */
+/*   Created: 2024/12/13 09:16:08 by ameduboi          #+#    #+#             */
+/*   Updated: 2025/01/21 20:17:19 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_get_line(char *buffer)
+static char	*ft_read_line(char *rest, int fd)
 {
+	char	*buffer;
 	int		i;
-	char	*str;
 
-	i = 0;
-	if (!buffer[i])
-		return (NULL);
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	str = ft_substr(buffer, 0, i + ft_endl(buffer));
-	if (!str)
-	{
-		free(str);
-		return (NULL);
-	}
-	return (str);
-}
-
-char	*ft_new_str(char *buffer)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	while (buffer[i] && buffer[i] != '\n')
-		i++;
-	if (!buffer[i])
-	{
-		free(buffer);
-		return (NULL);
-	}
-	str = malloc(sizeof(char) * (ft_strlen(buffer) - i + 1));
-	if (!str)
-	{
-		free(str);
-		return (NULL);
-	}
-	i++;
-	j = 0;
-	while (buffer[i])
-		str[j++] = buffer[i++];
-	str[j] = '\0';
-	free(buffer);
-	return (str);
-}
-
-char	*ft_read_str(int fd, char *buffer)
-{
-	char	*s;
-	int		bytes;
-
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
-		buffer = ft_calloc(1, 1);
-	s = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!s)
 		return (NULL);
-	bytes = 1;
-	while (!ft_strchr(buffer, '\n') && bytes != 0)
+	i = 1;
+	while (!ft_strchr_gnl(rest, '\n') && i > 0)
 	{
-		bytes = read(fd, s, BUFFER_SIZE);
-		if (bytes < 0)
+		i = read(fd, buffer, BUFFER_SIZE);
+		if (i < 0)
 		{
-			free(s);
+			free(rest);
+			free(buffer);
 			return (NULL);
 		}
-		s[bytes] = '\0';
-		buffer = ft_strjoin(buffer, s);
+		buffer[i] = '\0';
+		rest = ft_strjoin_gnl(rest, buffer);
 	}
-	free(s);
-	return (buffer);
+	free(buffer);
+	return (rest);
+}
+
+static char	*update_rest(char *line, char *rest)
+{
+	char			*new_rest;
+	unsigned int	len;
+
+	len = ft_strlen_gnl(line);
+	new_rest = ft_substr_gnl(rest, len, ft_strlen_gnl(rest) - len);
+	free(rest);
+	return (new_rest);
 }
 
 char	*get_next_line(int fd)
 {
+	static char	*rest = NULL;
 	char		*line;
-	static char	*buffer;
+	int			i;
 
+	i = 0;
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
-	buffer = ft_read_str(fd, buffer);
-	if (!buffer)
 		return (NULL);
-	line = ft_get_line(buffer);
-	buffer = ft_new_str(buffer);
+	rest = ft_read_line(rest, fd);
+	if (!rest)
+	{
+		free(rest);
+		return (NULL);
+	}
+	while (rest[i] && rest[i] != '\n')
+		i++;
+	line = ft_substr_gnl(rest, 0, i + 1);
+	rest = update_rest(line, rest);
 	return (line);
 }
+/*
+int     main(void)
+{
+        char    *str;
+        int fd = open("persona", O_RDONLY);
+        
+        if (fd < 1)
+                return (0);
+        str = get_next_line(fd);
+        while (str != NULL)
+        {
+                if (str)
+                {
+                        printf("%s", str);
+                        free(str);
+                        str = get_next_line(fd);
+                }
+        }
+        close(fd);
+        return(0);
+}
+*/

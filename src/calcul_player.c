@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/16 23:56:59 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/18 03:19:33 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@ t_player	*init_player(t_parameters *params)
 	coord.x = 0;
 	coord.y = 0;
 	player = ft_calloc(1, sizeof(t_player));
+	if (!player)
+		return (NULL);
 	while (params->map[++i])
 	{
 		if (params->map[i] == 'P')
-		{
-			set_player_coord(player, &coord);
-			return (coord, player);
-		}
+			return (set_player_coord(player, &coord), player);
 		coord.x++;
 		if (params->map[i] == '\n')
 		{
@@ -36,7 +35,8 @@ t_player	*init_player(t_parameters *params)
 			coord.y++;
 		}
 	}
-	return (player);
+	free(player);
+	return (NULL);
 }
 
 void	move_up(t_player *player, t_parameters *params)

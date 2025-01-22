@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:53:19 by achillebosc       #+#    #+#             */
-/*   Updated: 2025/01/16 21:22:03 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/18 03:48:43 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ int	flood_fill(char **map, t_pos *coord, int *exit, int *collectibles)
 	down = ft_calloc(1, sizeof(t_pos));
 	left = ft_calloc(1, sizeof(t_pos));
 	right = ft_calloc(1, sizeof(t_pos));
+	if (!up || !down || !left || !right)
+		return (1);
 	up->x = coord->x;
 	up->y = coord->y - 1;
 	down->x = coord->x;
@@ -84,6 +86,8 @@ int	validate_map(char *map, int width, int height)
 	player_coord.x = -1;
 	player_coord.y = -1;
 	new_map = ft_split(map, '\n');
+	if (!new_map)
+		return (0);
 	y = 0;
 	while (new_map[y])
 	{
@@ -95,18 +99,15 @@ int	validate_map(char *map, int width, int height)
 			else if (new_map[y][x] == 'E')
 				exit++;
 			else if (new_map[y][x] == 'P')
-			{
-				player_coord.x = x;
-				player_coord.y = y;
-			}
+				player_coord = (t_pos){x, y};
 			x++;
 		}
 		if (x != width)
-			return (0);
+			return (free_str_tab(new_map), 0);
 		y++;
 	}
 	if (y != height)
-		return (0);
+		return (free_str_tab(new_map), 0);
 	if (player_coord.x == -1 || player_coord.y == -1 || exit != 1
 		|| collectibles == 0 || check_border(new_map, width, height) == 0 || flood_fill(new_map, &player_coord, &exit,
 			&collectibles) == 1)

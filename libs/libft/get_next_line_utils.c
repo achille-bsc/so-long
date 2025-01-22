@@ -5,76 +5,88 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/05 23:57:20 by abosc             #+#    #+#             */
-/*   Updated: 2024/11/10 16:15:45 by abosc            ###   ########.fr       */
+/*   Created: 2024/11/14 22:31:49 by ameduboi          #+#    #+#             */
+/*   Updated: 2025/01/21 20:22:17 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen_gnl(char *line)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	if (!line)
+		return (0);
+	while (line[i])
 		i++;
 	return (i);
 }
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
+	char	*result;
 	int		i;
-	char	*new;
+	int		j;
 
-	if (!str || !c)
-		return (NULL);
-	i = 0;
-	new = (char *)str;
-	while (new[i])
+	i = -1;
+	j = 0;
+	if (!s1)
 	{
-		if (new[i] == (char) c)
-			return (&new[i]);
-		i++;
+		s1 = malloc(1);
+		s1[0] = '\0';
 	}
-	return (0);
+	if (!s1 || !s2)
+		return (NULL);
+	result = malloc(sizeof(char) * (ft_strlen_gnl(s1) + ft_strlen_gnl(s2) + 1));
+	if (!result)
+		return (NULL);
+	while (s1[++i])
+		result[i] = s1[i];
+	while (s2[j])
+		result[i++] = s2[j++];
+	result[i] = '\0';
+	free(s1);
+	return (result);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+int	ft_strchr_gnl(char *s, int c)
 {
-	char			*substr;
-	size_t			i;
-	unsigned int	slen;
+	size_t		i;
+	char		*ptr;
 
+	i = 0;
+	ptr = (char *)s;
 	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	if (((slen - start) > len) && (start < slen))
-		substr = malloc((len * sizeof(char) + 1));
-	else if (start > slen)
-		substr = malloc(sizeof(char));
-	else
-		substr = malloc(((slen - start) * sizeof(char) + 1));
-	if (!substr)
-		return (NULL);
-	i = 0;
-	if ((start < slen))
+		return (0);
+	while (s[i])
 	{
-		while ((i < len) && s[start])
-			substr[i++] = s[start++];
+		if (ptr[i] == (char)c)
+			return (1);
+		i++;
 	}
-	substr[i] = '\0';
-	return (substr);
+	return (0);
 }
 
-int	ft_endl(char *str)
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len)
 {
-	int	i;
+	char	*dest;
+	size_t	i;
 
+	if (!s[0])
+		return (NULL);
+	if (start > ft_strlen_gnl(s) || len == 0)
+		return (NULL);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (!dest)
+		return (NULL);
 	i = 0;
-	while (str[i] != '\n' && str[i] != '\0')
+	while (i < len)
+	{
+		dest[i] = s[start + i];
 		i++;
-	if (str[i] == '\n')
-		return (1);
-	return (0);
+	}
+	dest[i] = '\0';
+	return (dest);
 }

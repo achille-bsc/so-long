@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/16 21:20:46 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 00:11:00 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ void			move_left(t_player *player, t_parameters *params);
 void			move_right(t_player *player, t_parameters *params);
 int				check_movement(t_parameters *params, t_pos coord);
 int				load_collectibles(char *map);
-void			draw_texture(t_window *window, t_pos *pos, char map_char,
+void			draw_texture(t_pos *pos, t_parameters *params, char map_char,
 					char *orientation);
-int	close_window(t_parameters *param);
+int				close_window(t_parameters *param);
 
 // Utils
 char			*get_map(int argc, char **argv);
-void			*create_window(void *mlx);
+void			*create_window(void *mlx, t_parameters *params);
 void			*create_mlx(void);
 t_parameters	*init_parameters(void);
 char			*load_map(char *map);
+
 // Utils 2
 int				get_map_width(char *map);
 int				get_map_height(char *map);

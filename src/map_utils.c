@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 04:36:58 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/16 20:37:03 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/22 00:22:53 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	player_checker(t_parameters *params, int x, int y, int i)
 
 void	increment_coords(int *x, int *y, t_pos *pos)
 {
-	pos->y += 32;
 	pos->x = 0;
+	pos->y += 32;
 	*y += 1;
 	*x = 0;
 }
@@ -53,5 +53,6 @@ void	exec_player(t_parameters *params)
 
 	pos2 = NULL;
 	update_coord(pos2, params->player);
-	draw_texture(params->window, pos2, 'p', params->player->orientation);
+	draw_texture(pos2, params, 'p', params->player->orientation);
+	free(pos2);
 }
