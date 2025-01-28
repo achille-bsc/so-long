@@ -6,19 +6,25 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 03:17:03 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 21:31:11 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/24 00:01:05 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/so_long.h"
 
-char	*get_map(int argc, char **argv)
+char	*get_map(int argc, char **argv, void *mlx, t_parameters *params)
 {
 	char	*map;
 
 	map = "./maps/map_simple.ber";
-	if (argc != 1)
+	if (argc == 2)
 		map = argv[1];
+	if (ft_strncmp(map + ft_strlen(map) - 4, ".ber", 4) != 0 || argc > 2)
+	{
+		params->window = ft_calloc(1, sizeof(t_window));
+		params->window->mlx = mlx;
+		close_window(params, 0);
+	}
 	return (map);
 }
 
@@ -56,10 +62,16 @@ t_parameters	*init_parameters(void)
 	return (parameters);
 }
 
-char	*load_map(char *map)
+char	*load_map(char *map, void *mlx, t_parameters *params)
 {
 	int	fd;
 
 	fd = open(map, O_RDONLY);
+	if (fd == -1)
+	{
+		params->window = ft_calloc(1, sizeof(t_window));
+		params->window->mlx = mlx;
+		close_window(params, 0);
+	}
 	return (read_file(fd));
 }

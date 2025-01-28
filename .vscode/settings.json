@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"functional": "c",
-		"__locale": "c"
+		"__locale": "c",
+		"ios": "c"
 	}
 }

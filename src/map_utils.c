@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 04:36:58 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 00:22:53 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/23 22:54:59 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	player_checker(t_parameters *params, int x, int y, int i)
 		params->player->can_exit = 1;
 	if (params->map[i] == 'E' && params->player->pos_x == x
 		&& params->player->pos_y == y && params->player->can_exit)
-		close_window(params);
+		close_window(params, 1);
 }
 
 void	increment_coords(int *x, int *y, t_pos *pos)

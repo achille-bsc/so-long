@@ -6,12 +6,12 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 22:13:17 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/24 01:05:48 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG
-# define SO_LONG
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
 # include "../libs/libft/libft.h"
 # include "../libs/minilibx-linux/mlx.h"
@@ -21,6 +21,7 @@
 # define EVENT_CLOSE 17
 # define MASK_NO_EVENT 0
 # define FPS 120
+
 void			draw_map(char *map_chars, t_player *player,
 					t_parameters *params);
 void			printer(t_window win, t_pos *pos, char *pict);
@@ -35,14 +36,15 @@ int				check_movement(t_parameters *params, t_pos coord);
 int				load_collectibles(char *map);
 void			draw_texture(t_pos *pos, t_parameters *params, char map_char,
 					char *orientation);
-int				close_window(t_parameters *param);
+int				close_window(t_parameters *param, int err);
 
 // Utils
-char			*get_map(int argc, char **argv);
+char			*get_map(int argc, char **argv, void *mlx,
+					t_parameters *params);
 void			*create_window(void *mlx, t_parameters *params);
 void			*create_mlx(void);
 t_parameters	*init_parameters(void);
-char			*load_map(char *map);
+char			*load_map(char *map, void *mlx, t_parameters *params);
 
 // Utils 2
 int				get_map_width(char *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abosc <abosc@student.42.fr>                +#+  +:+       +#+        */
+/*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 17:23:54 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/18 03:19:33 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/23 23:57:04 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	move_up(t_player *player, t_parameters *params)
 		player->last_pos_y = player->pos_y;
 		player->pos_y -= 1;
 		player->orientation = "top";
+		params->player->moved = 1;
 	}
 }
 
@@ -58,6 +59,7 @@ void	move_down(t_player *player, t_parameters *params)
 		player->last_pos_y = player->pos_y;
 		player->pos_y += 1;
 		player->orientation = "bottom";
+		params->player->moved = 1;
 	}
 }
 
@@ -69,6 +71,7 @@ void	move_left(t_player *player, t_parameters *params)
 		player->last_pos_y = player->pos_y;
 		player->pos_x -= 1;
 		player->orientation = "left";
+		params->player->moved = 1;
 	}
 }
 
@@ -80,5 +83,6 @@ void	move_right(t_player *player, t_parameters *params)
 		player->last_pos_y = player->pos_y;
 		player->pos_x += 1;
 		player->orientation = "right";
+		params->player->moved = 1;
 	}
 }

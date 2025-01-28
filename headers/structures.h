@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 16:34:33 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/22 22:12:00 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/24 01:02:52 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_player
 	int			moved;
 	int			collected;
 	int			steps;
-	int 		can_exit;
+	int			can_exit;
 }				t_player;
 
 typedef struct s_checker_infos
@@ -61,9 +61,9 @@ typedef struct s_parameters
 
 typedef struct s_map_validation
 {
-	t_pos	player_coord;
-	int		exit;
-	int		collectibles;
-	int		width;
-	int		height;
-}	t_map_validation;
+	t_pos		player_coord;
+	int			exit;
+	int			collectibles;
+	int			width;
+	int			height;
+}				t_map_validation;
