@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:50 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/24 01:05:48 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/29 00:25:24 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,7 @@ int				process_neighbors(char **map, t_pos *coord, int *exit,
 int				validate_map_conditions(t_map_validation *validation,
 					char **new_map);
 
+// ff utils 2
+int				ff_confitionals(char **map, t_pos *coord, int *collectibles,
+					int *exit);
 #endif

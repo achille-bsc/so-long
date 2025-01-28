@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 21:57:47 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/28 22:28:24 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/28 23:39:54 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ t_pos	*allocate_position(int x, int y)
 
 int	check_position(char **map, t_pos *coord, int *exit, int *collectibles)
 {
-	if (coord->y < 0 || coord->x < 0 || !map[coord->y] || !map[coord->y][coord->x])
-        return (1);
+	if (coord->y < 0 || coord->x < 0 || !map[coord->y]
+		|| !map[coord->y][coord->x])
+		return (1);
 	if (map[coord->y][coord->x] == 'C')
 		(*collectibles)--;
 	if (map[coord->y][coord->x] == 'E')

@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 23:53:19 by achillebosc       #+#    #+#             */
-/*   Updated: 2025/01/28 22:35:58 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/29 00:31:35 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,13 @@ int	flood_fill(char **map, t_pos *coord, int *exit, int *collectibles)
 	t_pos	down;
 	t_pos	left;
 	t_pos	right;
+	int		condition;
 
-	if (coord->y < 0 || coord->x < 0 || !map[coord->y]
-		|| !map[coord->y][coord->x])
+	condition = ff_confitionals(map, coord, collectibles, exit);
+	if (condition == 1)
 		return (1);
-	if (map[coord->y][coord->x] == '1' || map[coord->y][coord->x] == 'V')
-		return (1);
-	if (map[coord->y][coord->x] == 'C')
-		(*collectibles)--;
-	if (map[coord->y][coord->x] == 'E')
-	{
-		if (*exit > 0)
-			(*exit)--;
-		map[coord->y][coord->x] = 'V';
+	if (condition == 0)
 		return (0);
-	}
 	map[coord->y][coord->x] = 'V';
 	up = (t_pos){coord->x, coord->y - 1};
 	down = (t_pos){coord->x, coord->y + 1};
@@ -81,24 +73,11 @@ int	validate_map(char *map, int width, int height)
 		return (0);
 	lines = process_map_line(new_map, &validation.player_coord,
 			&validation.exit, &validation.collectibles);
-	// ft_printf("exit: %d\n", validation.exit);
-	// ft_printf("lines: %d\n", lines);
-	// ft_printf("height %d\n", height);
-	// ft_printf("validate map conditions: %d\n",
-	// 	validate_map_conditions(&validation, new_map));
-	// ft_printf("flood fill: %d\n", flood_fill(new_map,
-	//		&validation.player_coord,
-	// 		&validation.exit, &validation.collectibles));
-	// ft_printf("exit: %d\n", validation.exit);
-	// ft_printf("collectibles: %d\n", validation.collectibles);
 	if (lines == 0 || lines != height || validate_map_conditions(&validation,
 			new_map) == 0 || flood_fill(new_map, &validation.player_coord,
 			&validation.exit, &validation.collectibles) == 1
 		|| validation.exit != 0 || validation.collectibles != 0)
-	{
-		ft_printf("Erroadfs;dmvffalz;df.kmvr\n");
 		return (free_str_tab(new_map), 0);
-	}
 	return (free_str_tab(new_map), 1);
 }
 

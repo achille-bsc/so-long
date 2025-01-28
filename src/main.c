@@ -6,7 +6,7 @@
 /*   By: abosc <abosc@student.42lehavre.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 18:34:31 by abosc             #+#    #+#             */
-/*   Updated: 2025/01/28 21:44:33 by abosc            ###   ########.fr       */
+/*   Updated: 2025/01/29 00:04:50 by abosc            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ int	main(int argc, char **argv)
 	parameters->img_count = 0;
 	if (!validate_map(parameters->map, get_map_width(parameters->map),
 			get_map_height(parameters->map)))
-	{
-		ft_printf("Error\nInvalid map\n");
 		close_window(parameters, 0);
-	}
 	parameters->window->win = create_window(mlx, parameters);
 	draw_map(parameters->map, parameters->player, parameters);
 	mlx_hook(parameters->window->win, EVENT_CLOSE, 0, close_window, parameters);
