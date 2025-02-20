@@ -16,11 +16,11 @@
 
 | 🏷️ Touche | 📜 Action                  |
 | ---------- | -------------------------- |
-| `W` / `↑`  | 🔼 Déplacer vers le haut   |
-| `S` / `↓`  | 🔽 Déplacer vers le bas    |
-| `A` / `←`  | ◀️ Déplacer vers la gauche |
-| `D` / `→`  | ▶️ Déplacer vers la droite |
-| `ESC`      | ❌ Quitter le jeu           |
+|   `W` / `↑`  | 🔼 Déplacer vers le haut   |
+|   `S` / `↓`  | 🔽 Déplacer vers le bas    |
+|   `A` / `←`  | ◀️ Déplacer vers la gauche |
+|   `D` / `→`  | ▶️ Déplacer vers la droite |
+| `ESC` / `q`  | ❌ Quitter le jeu           |
 
 ## 📜 Format de la Carte
 
@@ -33,7 +33,6 @@ La carte est définie par un fichier `.ber`, contenant des caractères symbolisa
 | `P`           | 🎮 Position initiale du joueur |
 | `C`           | 💎 Collectible                 |
 | `E`           | 🚪 Sortie                      |
-| `X`           | 👾 Ennemi (optionnel)          |
 
 Exemple de carte :
 
