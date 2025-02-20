@@ -98,7 +98,7 @@ Projet réalisé dans le cadre de l'école 42 par **Achille BOSC**.
 
 ---
 
-📢 *Cet article a été rédigé par une intelligence artificielle, mais le projet n'a pas été généré par IA.*
+📢 *Cet article a été rédigé par une intelligence artificielle. Le code lui, n'a d'aucune sorte été généré ou modifié par l'IA. 100% du code lié a ce Repertoire GitHub a été fais par les autheurs mentionnés*
 
 🔗 [ChatGPT](https://chat.openai.com/)
 
